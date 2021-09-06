@@ -509,7 +509,7 @@ Transform:
   m_Children:
   - {fileID: 672635432}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -76.74, z: 0}
 --- !u!1001 &570502819
 PrefabInstance:
@@ -1037,27 +1037,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81994c51180265548b039ef657e584dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0.972549, g: 0.74595207, b: 0, a: 1}
-  colorW: {r: 1, g: 1, b: 1, a: 1}
-  c1: {r: 1, g: 0.5, b: 0, a: 1}
-  acolor: {r: 1, g: 0.5, b: 0, a: 0.5}
-  v2: {x: 0, y: 0}
-  v2R: {x: 1, y: 0}
-  v2U: {x: 0, y: 1}
-  V2One: {x: 1, y: 1}
-  v2Cus: {x: 2.5, y: 50}
-  v3: {x: 1, y: 2, z: 3}
-  v3F: {x: 0, y: 0, z: 1}
-  v4: {x: 1, y: 2, z: 3, w: 4}
-  keys: 0
-  move: 119
-  jump: 32
-  sound: {fileID: 0}
-  movie: {fileID: 0}
-  sprite: {fileID: 0}
-  tex: {fileID: 0}
-  mat: {fileID: 0}
   speed: 10.5
+  jumpHeight: 100
+  isOnFloor: 0
+  floorMovement: {x: 0, y: 0, z: 0}
+  floorRadius: 0.2
+  soundJump: {fileID: 0}
+  soundLanding: {fileID: 0}
+  walk: isWaking
+  run: isRunnging
+  injury: isInjury
+  dead: isDead
 --- !u!1001 &995766419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1362,7 +1352,7 @@ Transform:
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1362074108
 GameObject:

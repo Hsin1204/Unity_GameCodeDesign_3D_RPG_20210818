@@ -20,7 +20,7 @@ public class Script_ThirdPersonControlloer : MonoBehaviour
      Unity 以屬性面板資料為主
      欄位屬性 : 輔助欄位資料
      欄位屬性語法 : [屬性名稱(屬性值)]
-     */
+    
     //Unity資料類型
     //顏色
     public Color color;
@@ -49,8 +49,16 @@ public class Script_ThirdPersonControlloer : MonoBehaviour
     public Texture2D tex;
     public Material mat;
 
-    #endregion
+    //遊戲類型
 
+    public Transform trans;
+    public Animator newAnimator;
+    public Animation newAni;
+    public Light lit;
+    public Camera cam;
+    */
+    #endregion
+ 
     #region 屬性 Property
 
     #endregion
@@ -62,8 +70,36 @@ public class Script_ThirdPersonControlloer : MonoBehaviour
     #region 事件 Event
 
     #endregion
-    [Header("移動速度"),Tooltip("用來調整角色移動速度"),Range(1,50)]
+    [Header("移動速度"),Range(0,500)]
     public float speed = 10.5f;
+
+    [Header("跳躍高度"), Range(0, 1000)]
+    public float jumpHeight = 100f;
+    
+    [Header("是否在地板上"),Tooltip("偵測是否在地板上")]
+    public bool isOnFloor = false;
+
+    public Vector3 floorMovement;
+
+    [Range(0,3)]
+    public float floorRadius = 0.2f;
+    
+    [Header("音效")]
+    public AudioClip soundJump;
+
+    public AudioClip soundLanding;
+
+    [Header("動畫參數")]
+    public string walk = "isWaking";
+    public string run ="isRunnging";
+    public string injury = "isInjury";
+    public string dead = "isDead";
+
+    private AudioSource aSource;
+    private Rigidbody rigid;
+    private Animator cus_Animator;
+
+
 
 
 }
