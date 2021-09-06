@@ -57,33 +57,20 @@ public class Script_ThirdPersonControlloer : MonoBehaviour
     public Light lit;
     public Camera cam;
     */
-    #endregion
- 
-    #region 屬性 Property
-
-    #endregion
-
-    #region 方法 Method
-
-    #endregion
-
-    #region 事件 Event
-
-    #endregion
-    [Header("移動速度"),Range(0,500)]
+    [Header("移動速度"), Range(0, 500)]
     public float speed = 10.5f;
 
     [Header("跳躍高度"), Range(0, 1000)]
     public float jumpHeight = 100f;
-    
-    [Header("是否在地板上"),Tooltip("偵測是否在地板上")]
+
+    [Header("是否在地板上"), Tooltip("偵測是否在地板上")]
     public bool isOnFloor = false;
 
     public Vector3 floorMovement;
 
-    [Range(0,3)]
+    [Range(0, 3)]
     public float floorRadius = 0.2f;
-    
+
     [Header("音效")]
     public AudioClip soundJump;
 
@@ -91,13 +78,96 @@ public class Script_ThirdPersonControlloer : MonoBehaviour
 
     [Header("動畫參數")]
     public string walk = "isWaking";
-    public string run ="isRunnging";
+    public string run = "isRunnging";
     public string injury = "isInjury";
     public string dead = "isDead";
 
     private AudioSource aSource;
     private Rigidbody rigid;
     private Animator cus_Animator;
+    #endregion
+
+    #region 屬性 Property
+    //不會出現在面板上
+    //儲存資料，與欄位相同
+    //差異在於可以設定存取權限 Get Set
+    //屬性語法 : 修飾詞 資料類型 屬性名稱 {get;set}
+    public int readAndWrite { get; set; }
+
+    /*唯寫屬性:禁止，必須要有get
+      public int write{set;}
+      value 指的是後面賦予的值
+    */
+    private int _hp;
+    public int hp
+    {
+        get
+        {
+            return _hp;
+        }
+        set
+        {
+            _hp = value;
+        }
+    }
+    #endregion
+  
+    #region 方法 Method
+    /*定義與實作較複雜程式的區塊、功能
+      方法語法 : 修飾詞 傳回資料類型 方法名稱(參數(可用多個，用","分開*建議不要超過三個))
+                {程式區塊}
+      常用傳回類型:無傳回 void - 此方法沒有傳回資料
+      自動排版 : Ctrl+K+D
+      自訂方法 : 名稱顏色為淡黃色 - 沒有被呼叫
+                名稱顏色為亮黃色 - 有被呼叫
+      自訂方法必須被呼叫才會被執行
+     */
+    private void Test()
+    {
+        print("我是自訂方法");
+    }
+    private int Jump()
+    {
+        return 999;
+    }
+    private void damage(float d)
+    {
+        print("傷害" + d);
+    }
+    #endregion
+
+    #region 事件 Event
+    //特定時間點會執行的方法，程式的入口Start等於Console Main
+    //開始事件 : 遊戲開始時執行一次 - 處理初始化、取得資料等等
+
+    private void Start()
+    {
+        /* print("欄位資料 - 移動速度" + speed);
+         print("欄位資料 - 讀寫屬性" + readAndWrite);
+         speed = 20.5f;
+         readAndWrite = 90;
+         print("修改後的資料");
+         print("欄位資料 - 移動速度" + speed);
+         print("欄位資料 - 讀寫屬性" + readAndWrite);*/
+        Test();
+        int j = Jump();
+        print(j);
+        damage(500f);
+        #region
+        /*print("hp = " + hp);
+        hp = 100;
+        print("hp = " + hp);
+        #endregion*/
+        #endregion
+    }
+    //更新事件 : 執行次數以FPS為準
+    //處理持續性運動，移動物件，監聽玩家輸入按鍵
+    private void Update()
+    {
+        
+    }
+    #endregion
+    
 
 
 
