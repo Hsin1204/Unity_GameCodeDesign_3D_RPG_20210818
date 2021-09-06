@@ -1020,6 +1020,44 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: ec716a21155a8f5478f8a95cc50c4645, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 791ca80e101dbf94b894845d81f1ebb6, type: 3}
+--- !u!1 &992234992 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 791ca80e101dbf94b894845d81f1ebb6, type: 3}
+  m_PrefabInstance: {fileID: 992234991}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &992234993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992234992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81994c51180265548b039ef657e584dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 0.972549, g: 0.74595207, b: 0, a: 1}
+  colorW: {r: 1, g: 1, b: 1, a: 1}
+  c1: {r: 1, g: 0.5, b: 0, a: 1}
+  acolor: {r: 1, g: 0.5, b: 0, a: 0.5}
+  v2: {x: 0, y: 0}
+  v2R: {x: 1, y: 0}
+  v2U: {x: 0, y: 1}
+  V2One: {x: 1, y: 1}
+  v2Cus: {x: 2.5, y: 50}
+  v3: {x: 1, y: 2, z: 3}
+  v3F: {x: 0, y: 0, z: 1}
+  v4: {x: 1, y: 2, z: 3, w: 4}
+  keys: 0
+  move: 119
+  jump: 32
+  sound: {fileID: 0}
+  movie: {fileID: 0}
+  sprite: {fileID: 0}
+  tex: {fileID: 0}
+  mat: {fileID: 0}
+  speed: 10.5
 --- !u!1001 &995766419
 PrefabInstance:
   m_ObjectHideFlags: 0
