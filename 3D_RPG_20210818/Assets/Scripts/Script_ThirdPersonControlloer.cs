@@ -134,7 +134,22 @@ public class Script_ThirdPersonControlloer : MonoBehaviour
     {
         print("傷害" + d);
     }
-    #endregion
+    //選填式參數一定要在最右邊
+    private void effectAttack(int dama,string attaName = "Dust",string sound = "嘎嘎嘎")
+    {
+        print("damge = " + dama);
+        print(attaName);
+        print("音效 = " + sound);
+    }
+    private float BMI(float w,float h,string name = "test" )
+    {
+        print(name + "的BMI");
+        if(h>5)
+        {
+            h = h / 100;
+        }
+        return (w / (h * h));
+    }
 
     #region 事件 Event
     //特定時間點會執行的方法，程式的入口Start等於Console Main
@@ -149,15 +164,17 @@ public class Script_ThirdPersonControlloer : MonoBehaviour
          print("修改後的資料");
          print("欄位資料 - 移動速度" + speed);
          print("欄位資料 - 讀寫屬性" + readAndWrite);*/
-        Test();
+        /*Test();
         int j = Jump();
         print(j);
         damage(500f);
+        effectAttack(500,sound:"咻咻咻");*/
         #region
         /*print("hp = " + hp);
         hp = 100;
-        print("hp = " + hp);
-        #endregion*/
+        print("hp = " + hp);*/
+        #endregion
+        print(BMI(50, 155));
         #endregion
     }
     //更新事件 : 執行次數以FPS為準
