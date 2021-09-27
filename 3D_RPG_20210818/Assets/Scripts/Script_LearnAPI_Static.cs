@@ -40,5 +40,10 @@ public class Script_LearnAPI_Static: MonoBehaviour
         #region
         //print("時間 : "+Time.timeSinceLevelLoad);
         #endregion
+
+        #region
+        float h = Input.GetAxis("Horizontal");
+        print("輸入軸向為 : " + h);
+        #endregion
     }
 }
