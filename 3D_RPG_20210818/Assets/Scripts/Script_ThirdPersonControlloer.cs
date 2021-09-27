@@ -85,6 +85,8 @@ public class Script_ThirdPersonControlloer : MonoBehaviour
     private AudioSource aSource;
     private Rigidbody rigid;
     private Animator cus_Animator;
+
+    public GameObject PlayerObj;
     #endregion
 
     #region 屬性 Property
@@ -176,6 +178,15 @@ public class Script_ThirdPersonControlloer : MonoBehaviour
         #endregion
         print(BMI(50, 155));
         #endregion
+
+        //取得元件的方式
+        //1.物件欄位的名稱.取得元件(類型(元件類型)) 當作 元件類型
+        aSource = PlayerObj.GetComponent(typeof(AudioSource)) as AudioSource;
+        //2.此腳本遊戲物件.取得元件<泛型>();
+        rigid = gameObject.GetComponent<Rigidbody>();
+        //3.取得元件<泛型>();
+        //類別可以使用繼承類別(父類別)的成員,公開或保護 欄位、屬性與方法;
+        cus_Animator = GetComponent<Animator>();
     }
     //更新事件 : 執行次數以FPS為準
     //處理持續性運動，移動物件，監聽玩家輸入按鍵

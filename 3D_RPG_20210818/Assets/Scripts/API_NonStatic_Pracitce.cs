@@ -33,6 +33,6 @@ public class API_NonStatic_Pracitce : MonoBehaviour
         sr_rotate.transform.Rotate(Vector3.forward, 0.1f);
 
         //第二張圖片往上飛
-        fly_rigid.AddForce(Vector2.up* 5f);
+        fly_rigid.AddForce(Vector2.up * 5f);
     }
 }
