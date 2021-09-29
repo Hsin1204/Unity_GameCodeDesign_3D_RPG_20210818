@@ -7,6 +7,8 @@ public class Script_PlayerContro : MonoBehaviour
 
     [Header("是否在地板上"), Tooltip("偵測是否在地板上")]
     public bool isOnFloor = false;
+    [Range(0, 3)]
+    public float checkfloorRadius = 0.2f;
 
     public Vector3 floorOffset;
 
@@ -50,13 +52,23 @@ public class Script_PlayerContro : MonoBehaviour
     /// <returns></returns>
     private bool checkFloor()
     {
-        return false;
+        Collider[] hits = Physics.OverlapSphere(transform.position +
+             transform.right * floorOffset.x +
+             transform.up * floorOffset.y +
+             transform.forward * floorOffset.z,
+             checkfloorRadius,1 << 3);
+
+        //print("碰到的第一個物件" + hits[0].name);
+
+        //傳回 碰撞陣列數量 > 0 就傳回true
+        return hits.Length >= 1;
     }
     /// <summary>
     /// 跳躍
     /// </summary>
     private void jump()
     {
+        //print("是否在地面上" + checkFloor());
 
     }
     /// <summary>
@@ -67,6 +79,11 @@ public class Script_PlayerContro : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        jump();
+        checkFloor();
+    }
     //固定0.02秒執行一次(使用需穩定更新的功能上)
     //通常用來處理物理行為
     private void FixedUpdate()
@@ -80,11 +97,11 @@ public class Script_PlayerContro : MonoBehaviour
     //在Unity Editor內繪製圖示輔助開法,發布後會自動隱藏
     private void OnDrawGizmos()
     {
-        Vector3 playerPosition = gameObject.transform.position;
+        
         //1.指定顏色
         //2.繪製圖形
         Gizmos.color = new Color(1, 0, 0.2f, 0.3f);
-        Gizmos.DrawSphere(playerPosition, 1);
+        Gizmos.DrawSphere(transform.position, checkfloorRadius);
     }
 
 
