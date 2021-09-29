@@ -6,7 +6,7 @@ public class Script_PlayerContro : MonoBehaviour
 {
 
     [Header("是否在地板上"), Tooltip("偵測是否在地板上")]
-    public bool isOnFloor = false;
+    public bool isLanding = false;
     [Range(0, 3)]
     public float checkfloorRadius = 0.2f;
 
@@ -14,13 +14,29 @@ public class Script_PlayerContro : MonoBehaviour
 
     [Header("角色移動速度")]
     public float speed;
+
+    [Header("跳躍高度"), Range(0, 1000)]
+    public float jumpHeight = 100f;
+
+    [Header("動畫參數")]
+    public string animP_Jumpping = "isJumpping";
+    public string animP_Landing = "isLanding";
+
+
+    //C# 6.0 存取子 可以使用lambda 運算子
+    //語法 : get => {程式區塊}
+    private bool keyJump { get => Input.GetKeyDown(KeyCode.Space); }
+
+    public GameObject playerObject;
     Rigidbody rigid;
+    Animator ani;
 
 
     private void Start()
     {
         
         rigid = gameObject.GetComponent<Rigidbody>();
+        ani = gameObject.GetComponent<Animator>();
     }
     /// <summary>
     /// 移動速度
@@ -60,6 +76,8 @@ public class Script_PlayerContro : MonoBehaviour
 
         //print("碰到的第一個物件" + hits[0].name);
 
+        isLanding = hits.Length > 0;
+
         //傳回 碰撞陣列數量 > 0 就傳回true
         return hits.Length >= 1;
     }
@@ -70,19 +88,36 @@ public class Script_PlayerContro : MonoBehaviour
     {
         //print("是否在地面上" + checkFloor());
 
+        if(checkFloor() == true && Input.GetKeyDown(KeyCode.Space))
+        {
+            
+            rigid.AddForce(transform.up * jumpHeight);
+        }
+
     }
     /// <summary>
     /// 更新動畫
     /// </summary>
-    private void refreshAni()
+    private void UpdateAni()
     {
-
+        ani.SetBool("isWalking", moveInput("Vertical") != 0 || moveInput("Horizontal") != 0);
+        ani.SetBool(animP_Landing, isLanding);
+        if (keyJump == true)
+        {
+            ani.SetTrigger(animP_Jumpping);
+        }
+       /* if (Input.GetAxis("Vertical") != 0)
+        { ani.SetBool("isWalking", true); }
+        else
+        { ani.SetBool("isWalking", false); }*/
+        
     }
 
     private void Update()
     {
+        UpdateAni();
         jump();
-        checkFloor();
+       
     }
     //固定0.02秒執行一次(使用需穩定更新的功能上)
     //通常用來處理物理行為

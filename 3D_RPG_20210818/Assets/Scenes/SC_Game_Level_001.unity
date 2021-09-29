@@ -976,7 +976,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 791ca80e101dbf94b894845d81f1ebb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.856
+      value: 0.173
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 791ca80e101dbf94b894845d81f1ebb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1045,6 +1045,7 @@ MonoBehaviour:
   checkfloorRadius: 0.1
   floorOffset: {x: 0, y: 0, z: 0}
   speed: 2.5
+  jumpHeight: 250
 --- !u!54 &992234994
 Rigidbody:
   m_ObjectHideFlags: 0
