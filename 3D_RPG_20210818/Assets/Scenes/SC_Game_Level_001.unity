@@ -976,7 +976,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 791ca80e101dbf94b894845d81f1ebb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.16853523
+      value: 0.164
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 791ca80e101dbf94b894845d81f1ebb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1018,6 +1018,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: ec716a21155a8f5478f8a95cc50c4645, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 791ca80e101dbf94b894845d81f1ebb6, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 791ca80e101dbf94b894845d81f1ebb6, type: 3}
 --- !u!1 &992234992 stripped
@@ -1034,21 +1038,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 992234992}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81994c51180265548b039ef657e584dc, type: 3}
+  m_Script: {fileID: 11500000, guid: 048d2965f0577694c913d9cd56053e24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10.5
-  jumpHeight: 100
   isOnFloor: 0
-  floorMovement: {x: 0, y: 0, z: 0}
-  floorRadius: 0.2
-  soundJump: {fileID: 0}
-  soundLanding: {fileID: 0}
-  walk: isWaking
-  run: isRunnging
-  injury: isInjury
-  dead: isDead
-  PlayerObj: {fileID: 992234992}
+  floorOffset: {x: 0, y: 0, z: 0}
+  speed: 2.5
 --- !u!54 &992234994
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1063,7 +1058,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!82 &992234997
 AudioSource:
