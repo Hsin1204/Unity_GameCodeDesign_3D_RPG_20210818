@@ -25,6 +25,9 @@ namespace Player
         [Header("上下旋轉的限制")]
         public Vector2 limitAngleX = new Vector2(0, 0);
 
+        [Header("角色前攝影機上下旋轉限制")]
+        public Vector2 limitAngleXFromTar = new Vector2(-0.2f, 0);
+
 
         /// <summary>
         /// 攝影機前方座標
@@ -65,7 +68,7 @@ namespace Player
         {
             TrackTarget();
             RotateCam();
-            LimitAngleX();
+            LimitAngleXandZfromTar();
             FreezeAngleZ();
 
         }
@@ -97,10 +100,11 @@ namespace Player
                 0);
            
         }
-        private void LimitAngleX()
+        private void LimitAngleXandZfromTar()
         {
             Quaternion angle = transform.rotation;
             angle.x = Mathf.Clamp(angle.x, limitAngleX.x, limitAngleX.y);
+            angle.z = Mathf.Clamp(angle.z, limitAngleXFromTar.x, limitAngleXFromTar.y);//限制角度Z軸 - 攝影機在目標前方
             transform.rotation = angle;
         }
         
