@@ -9,8 +9,11 @@ public class Script_PlayerContro : MonoBehaviour
     public bool isLanding = false;
     [Range(0, 3)]
     public float checkfloorRadius = 0.2f;
-
     public Vector3 floorOffset;
+
+    [Header("音效")]
+    public AudioClip soundJump;
+    public AudioClip soundLanding;
 
     [Header("角色移動速度")]
     public float speed;
@@ -28,13 +31,15 @@ public class Script_PlayerContro : MonoBehaviour
     private bool keyJump { get => Input.GetKeyDown(KeyCode.Space); }
 
     public GameObject playerObject;
-    Rigidbody rigid;
-    Animator ani;
+
+   private AudioSource aud;
+   private Rigidbody rigid;
+   private Animator ani;
 
 
     private void Start()
     {
-        
+        aud = gameObject.GetComponent<AudioSource>();
         rigid = gameObject.GetComponent<Rigidbody>();
         ani = gameObject.GetComponent<Animator>();
     }
@@ -78,6 +83,9 @@ public class Script_PlayerContro : MonoBehaviour
 
         isLanding = hits.Length > 0;
 
+        if (!isLanding && hits.Length>0)
+        { aud.PlayOneShot(soundLanding, Random.Range(2.0f,3.5f)); }
+            
         //傳回 碰撞陣列數量 > 0 就傳回true
         return hits.Length >= 1;
     }
@@ -92,6 +100,8 @@ public class Script_PlayerContro : MonoBehaviour
         {
             
             rigid.AddForce(transform.up * jumpHeight);
+            
+            aud.PlayOneShot(soundJump, Random.Range(0.5f,1.0f));
         }
 
     }
