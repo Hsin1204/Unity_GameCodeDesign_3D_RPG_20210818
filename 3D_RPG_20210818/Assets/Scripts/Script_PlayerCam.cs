@@ -22,6 +22,19 @@ namespace Player
         [Header("上下旋轉速度"), Range(0, 100)]
         public float turnSpeed_Vertical = 5;
 
+        [Header("上下旋轉的限制")]
+        public Vector2 limitAngleX = new Vector2(0, 0);
+
+
+        /// <summary>
+        /// 攝影機前方座標
+        /// </summary>
+        private Vector3 _posForward;
+
+        /// <summary>
+        /// 前方的長度
+        /// </summary>
+        private float forwardLen = 3f;
         #endregion
 
         #region 屬性
@@ -29,6 +42,19 @@ namespace Player
         private float inputMouseX { get => Input.GetAxis("Mouse X"); }
         //取得滑鼠垂直座標
         private float inputMouseY { get => Input.GetAxis("Mouse Y"); }
+
+        /// <summary>
+        /// 攝影機前方座標
+        /// </summary>
+        public Vector3 posForward
+        {
+            get
+            {
+                _posForward = transform.position + transform.forward * forwardLen;
+                _posForward.y = target.position.y;
+                return _posForward;
+            }
+        }
         #endregion
 
         #region 事件
@@ -39,8 +65,19 @@ namespace Player
         {
             TrackTarget();
             RotateCam();
-            
+            LimitAngleX();
+            FreezeAngleZ();
 
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = new Color(0, 0, 1, 0.3f);
+            //前方座標 = 此物件座標 + 此物件前方 * 長度
+            _posForward = transform.position + transform.forward * forwardLen;
+            //前方座標.y = 目標.座標y(讓前方座標的高度與目標相同)
+            _posForward.y = target.position.y;
+            Gizmos.DrawSphere(_posForward, 0.15f);
         }
         private void TrackTarget()
         {
@@ -58,8 +95,21 @@ namespace Player
                 inputMouseY *turnSpeed_Vertical*Time.deltaTime,
                 inputMouseX *turnSpeed_Horizontal*Time.deltaTime,
                 0);
+           
         }
-
+        private void LimitAngleX()
+        {
+            Quaternion angle = transform.rotation;
+            angle.x = Mathf.Clamp(angle.x, limitAngleX.x, limitAngleX.y);
+            transform.rotation = angle;
+        }
+        
+        private void FreezeAngleZ()
+        {
+            Vector3 angle = transform.eulerAngles;
+            angle.z = 0;
+            transform.eulerAngles = angle;
+        }    
         #endregion
 
     }

@@ -1070,7 +1070,7 @@ MonoBehaviour:
   jumpHeight: 250
   animP_Jumpping: isJumpping
   animP_Landing: isLanding
-  playerObject: {fileID: 0}
+  speedLookAt: 17.6
 --- !u!54 &992234994
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1407,8 +1407,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 992234996}
   trackSpeed: 35
-  turnSpeed_Horizontal: 15
-  turnSpeed_Vertical: 15
+  turnSpeed_Horizontal: 50
+  turnSpeed_Vertical: 50
+  limitAngleX: {x: -0.2, y: 0.2}
 --- !u!1001 &1306105184
 PrefabInstance:
   m_ObjectHideFlags: 0
