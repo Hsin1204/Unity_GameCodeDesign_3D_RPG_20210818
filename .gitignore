@@ -1,8 +1,10 @@
 [Ll]ibrary/
+[Ll]og/
 [Tt]emp/
 [Oo]bj/
 [Bb]uild/
 [Bb]uilds/
+
 Assets/AssetStoreTools*
 
 # Visual Studio cache directory
