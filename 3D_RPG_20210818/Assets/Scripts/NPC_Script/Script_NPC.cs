@@ -66,6 +66,7 @@ public class Script_NPC : MonoBehaviour
         {
             dialogueSys.StartDialogue(dataDialogue);
         }
+        else if(!CheckPlayer()) dialogueSys.StopDialogue();
     }
 }
 

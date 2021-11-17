@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9d4f3af507740840a799c02f999a4d2, type: 3}
   m_Name: freeMale_DialogueData
   m_EditorClassIdentifier: 
+  name: "\u963F\u59C6\u65AF\u7279\u6717"
   beforeMission:
   - "Hi,\u5927\u4E2D\u5929"
   - "\u4F60\u6709\u7A7A\u55CE"
@@ -21,3 +22,4 @@ MonoBehaviour:
   FinMission:
   - "\u611F\u6069"
   missionCount: 1
+  NPC_MS: 0

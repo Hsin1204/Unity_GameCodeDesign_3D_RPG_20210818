@@ -15,6 +15,8 @@ namespace Dialogue
     [CreateAssetMenu(menuName = "Cus/對話資料", fileName = "NPC對話資料")]
     public class Script_DataDialogue : ScriptableObject
     {
+        [Header("NPC的名字")]
+        public string name;
         [Header("任務前對話內容"), TextArea(3, 7)]
         public string[] beforeMission;
         [Header("任務中對話內容"), TextArea(3, 7)]
