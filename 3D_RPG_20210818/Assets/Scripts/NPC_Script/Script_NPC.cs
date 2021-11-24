@@ -23,6 +23,8 @@ public class Script_NPC : MonoBehaviour
     public Script_NPC_DialogueSys dialogueSys;
     private Transform target;
     private bool startDialoguKey { get => Input.GetKeyDown(KeyCode.E); }
+    //目前任務數量
+    private int currCount;
 
     private void OnDrawGizmos()
     {
@@ -67,6 +69,21 @@ public class Script_NPC : MonoBehaviour
             dialogueSys.StartDialogue(dataDialogue);
         }
         else if(!CheckPlayer()) dialogueSys.StopDialogue();
+    }
+    /// <summary>
+    /// 更新任務需求數量
+    /// 任務目標物件得到或死亡後處理
+    /// </summary>
+    public void UpdateMission()
+    {
+        currCount++;
+
+        // 目前數量 等於 需求數量 
+        if(currCount == dataDialogue.missionCount)
+        {
+            //狀態 等於 完成任務
+            dataDialogue.NPC_MS = NPC_MissionState.FinMission;
+        }
     }
 }
 

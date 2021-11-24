@@ -53,20 +53,23 @@ public class Script_NPC_DialogueSys : MonoBehaviour
 
         
     }
+    
+    //顯示對話內容
     private IEnumerator ShowDialogueContent(Script_DataDialogue data)
     {
         nameText.text = "";
-        finHint.SetActive(false);
         nameText.text = data.name;
+        string[] dialogueContents = data.beforeMission;
+        
         //遍循每一段對話
-        for(int j = 0;j<data.beforeMission.Length;j++)
+        for(int j = 0;j<dialogueContents.Length;j++)
         {
             contentText.text = "";
-
+            finHint.SetActive(false);
             //遍巡對話每一個字
-            for (int i = 0; i < data.beforeMission[j].Length; i++)
+            for (int i = 0; i < dialogueContents[j].Length; i++)
             {
-                contentText.text += data.beforeMission[j][i];
+                contentText.text += dialogueContents[j][i];
                 yield return new WaitForSeconds(intervalDialogue);
             }
             finHint.SetActive(true);
