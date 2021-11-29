@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Script_AttackSystem : MonoBehaviour
 {
@@ -16,6 +17,11 @@ public class Script_AttackSystem : MonoBehaviour
     public Vector3 v3AttackRegion;
     [Header("攻擊動畫參數")]
     public string paraAttack = "isAttackLayer";
+    public string paraWalk = "isWalking";
+    [Header("攻擊事件")]
+    public UnityEvent onAttack;
+    [Header("攻擊圖層遮色片")]
+    public AvatarMask attackMask;
     
     #endregion
 
@@ -59,8 +65,17 @@ public class Script_AttackSystem : MonoBehaviour
     /// </summary>
     private void Attack()
     {
-        if(keyAttack)
+        if(keyAttack && !isAttack)
         {
+            #region 攻擊圖層遮色片處理
+            bool isWalk = ani.GetBool(paraWalk);
+            attackMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.LeftLeg, !isWalk);
+            attackMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightLeg, !isWalk);
+            attackMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.LeftFootIK, !isWalk);
+            attackMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightFootIK, !isWalk);
+            attackMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.Root, !isWalk);
+            #endregion
+            onAttack.Invoke();
             isAttack = true;
             ani.SetTrigger(paraAttack);
             StartCoroutine(DelaySend());

@@ -16,7 +16,7 @@ namespace Dialogue
     public class Script_DataDialogue : ScriptableObject
     {
         [Header("NPC的名字")]
-        public string name;
+        public string npc_Name;
         [Header("任務前對話內容"), TextArea(3, 7)]
         public string[] beforeMission;
         [Header("任務中對話內容"), TextArea(3, 7)]

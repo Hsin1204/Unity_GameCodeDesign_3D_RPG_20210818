@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using Dialogue;
 
 
@@ -21,6 +22,8 @@ public class Script_NPC_DialogueSys : MonoBehaviour
     public float intervalDialogue = 0.3f;
     [Header("對話按鍵")]
     public KeyCode dialougeKey = KeyCode.F;
+    [Header("打字事件")]
+    public UnityEvent onType;
 
     /// <summary>
     /// 開始對話
@@ -59,8 +62,22 @@ public class Script_NPC_DialogueSys : MonoBehaviour
     {
         nameText.text = "";
         nameText.text = data.name;
-        string[] dialogueContents = data.beforeMission;
-        
+        string[] dialogueContents = { };
+
+        switch (data.NPC_MS)
+        {
+            case NPC_MissionState.BeforeMission:
+                dialogueContents = data.beforeMission;
+                break;
+            case NPC_MissionState.InMission:
+                dialogueContents = data.inMission;
+                break;
+            case NPC_MissionState.FinMission:
+                dialogueContents = data.FinMission;
+                break;
+            default:
+                break;
+        }
         //遍循每一段對話
         for(int j = 0;j<dialogueContents.Length;j++)
         {
@@ -69,6 +86,7 @@ public class Script_NPC_DialogueSys : MonoBehaviour
             //遍巡對話每一個字
             for (int i = 0; i < dialogueContents[j].Length; i++)
             {
+                onType.Invoke();
                 contentText.text += dialogueContents[j][i];
                 yield return new WaitForSeconds(intervalDialogue);
             }

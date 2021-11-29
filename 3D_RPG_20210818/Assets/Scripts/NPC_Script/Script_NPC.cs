@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using Dialogue;
 
 /// <summary>
@@ -9,6 +10,8 @@ using Dialogue;
 
 public class Script_NPC : MonoBehaviour
 {
+    [Header("完成任務事件")]
+    public UnityEvent onFinish;
     [Header("對話資料")]
     public Script_DataDialogue dataDialogue;
     [Header("相關資訊")]
@@ -31,11 +34,25 @@ public class Script_NPC : MonoBehaviour
         Gizmos.color = new Color(1,0,0,0.5f);
         Gizmos.DrawSphere(transform.position, checkRadius);
     }
+
+    private void Awake()
+    {
+        InitialState();
+    }
     private void Update()
     {
         hint.SetActive(CheckPlayer());
         FaceToPlayer();
         StartDialogue();
+    }
+    
+    /// <summary>
+    /// 初始設定
+    /// 狀態恢復為任務前
+    /// </summary>
+    private void InitialState()
+    {
+        dataDialogue.NPC_MS = NPC_MissionState.BeforeMission;
     }
     /// <summary>
     /// 偵測玩家是否進入偵測範圍
@@ -62,11 +79,20 @@ public class Script_NPC : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, angle, Time.deltaTime * turnSpeed);
         }
     }
+    /// <summary>
+    /// NPC對話系統
+    /// </summary>
     private void StartDialogue()
     {
         if (CheckPlayer() && startDialoguKey)
         {
             dialogueSys.StartDialogue(dataDialogue);
+
+            //判斷NPC的任務狀態
+            if(dataDialogue.NPC_MS == NPC_MissionState.BeforeMission)
+            {
+                dataDialogue.NPC_MS = NPC_MissionState.InMission;
+            }
         }
         else if(!CheckPlayer()) dialogueSys.StopDialogue();
     }
@@ -83,6 +109,7 @@ public class Script_NPC : MonoBehaviour
         {
             //狀態 等於 完成任務
             dataDialogue.NPC_MS = NPC_MissionState.FinMission;
+            onFinish.Invoke();
         }
     }
 }
